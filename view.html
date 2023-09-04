@@ -1,0 +1,56 @@
+<?php
+    $connection=mysqli_connect("localhost","root","","book_db");
+    if (!$connection)
+    {  
+        die("Connection failed: " . mysqli_connect_error());
+    } 
+    $query="select * from book_form "; 
+    $result =
+    mysqli_query($connection,$query); 
+    if(mysqli_num_rows($result)>0) 
+    { 
+        ?>
+        <center>
+        <table border="1" style="margin-top: 70px; border-collapse: collapse;">
+        <tr>
+        <th style="padding: 13px; background-color: rgb(52, 58, 64); color: white;"> ID </th>
+        <th style="text-align:center; padding: 13px; background-color: rgb(52, 58, 64); color: white;"> Name </th>
+        <th style="text-align:center; padding: 13px; background-color: rgb(52, 58, 64); color: white;"> Email </th>
+        <th style="text-align:center; padding: 13px; background-color: rgb(52, 58, 64); color: white;"> Phone </th>
+        <th style="text-align:center; padding: 13px; background-color: rgb(52, 58, 64); color: white;"> Address </th>
+        <th style="text-align:center; padding: 13px; background-color: rgb(52, 58, 64); color: white;"> Location </th>
+        <th style="text-align:center; padding: 13px; background-color: rgb(52, 58, 64); color: white;"> Guests </th>
+        <th style="text-align:center; padding: 13px; background-color: rgb(52, 58, 64); color: white;"> Arrivals </th>
+        <th style="text-align:center; padding: 13px; background-color: rgb(52, 58, 64); color: white;"> Leaving </th>
+        <th style="padding: 10px; background-color: rgb(52, 58, 64); color: white;"> Action </th>
+        <th style="padding: 10px; background-color: rgb(52, 58, 64); color: white;"> Action </th>
+        </tr>
+        <?php
+        while($row=mysqli_fetch_array($result))
+        { ?>
+            <tr>
+            <td style="padding: 13px; text-align:center; font-weight: bold;"> <?php echo $row['id']; ?> </td>
+            <td style="padding: 13px; text-align:center;"> <?php echo $row['name']; ?> </td>
+            <td style="padding: 13px; text-align:center;"> <?php echo $row['email']; ?> </td>
+            <td style="padding: 13px; text-align:center;"> <?php echo $row['phone']; ?> </td>
+            <td style="padding: 13px; text-align:center;"> <?php echo $row['address']; ?> </td> 
+            <td style="padding: 13px; text-align:center;"> <?php echo $row['location']; ?> </td>
+            <td style="padding: 13px; text-align:center;"> <?php echo $row['guests']; ?> </td>
+            <td style="padding: 13px; text-align:center;"> <?php echo $row['arrivals']; ?> </td>
+            <td style="padding: 13px; text-align:center;"> <?php echo $row['leaving']; ?> </td>
+            <td style="padding: 13px;">
+                <button style="background-color: red; height:35px; border-radius: 8px; font-size: 14px; border: none;">
+                 <a style="text-decoration: none; color: white; " href="delete.php?id=<?php echo $row['id']; ?>"> DELETE </a>
+                </button> 
+            </td>
+            <td style="color:rgb(210, 232, 246);  padding: 15px;">
+                <button style="background-color: rgb(0, 123, 255); height:35px; border-radius: 8px; font-size: 14px; border: none; "> 
+                <a style="text-decoration: none; color: white" href="update.php?id=<?php echo $row['id']; ?>">  UPDATE </a>
+                </button> 
+            </td> 
+            </tr>
+        </center>
+        
+        <?php }
+    }
+?>

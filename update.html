@@ -1,0 +1,103 @@
+<?php
+    $connection=mysqli_connect("localhost","root","","book_db");
+    if (!$connection)
+    {  
+        die("Connection failed: " . mysqli_connect_error());
+    } 
+
+    if(isset($_POST['send'])){
+
+        $id = $_GET['id'];
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $address = $_POST['address'];
+        $location = $_POST['location'];
+        $guests = $_POST['guests'];
+        $arrivals = $_POST['arrivals'];
+        $leaving = $_POST['leaving'];
+
+        echo $query="UPDATE `book_form` SET id =$id, name ='$name', email ='$email', phone ='$phone', address ='$address', 
+        location ='$location', guests = '$guests', arrivals = '$arrivals', leaving = '$leaving'  WHERE id = $id";
+      
+       $res = mysqli_query($connection,$query);
+       header('location:view.php');
+    }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Book</title>
+
+    <!-- swiper css link  -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/b1351f569b.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <!-- booking section starts  -->
+
+    <section class="booking">
+
+        <h1 class="heading-title">Update Records!</h1>
+
+        <form  enctype="multipart/form-data" method="post" class="book-form">
+
+            <div class="flex">
+                <div class="inputBox">
+                    <span><i class="fa-solid fa-user"></i> name :</span>
+                    <input type="text" placeholder="Enter your name" name="name">
+                </div>
+                <div class="inputBox">
+                    <span><i class="fa-solid fa-envelope fa-bounce"></i>&nbsp email :</span>
+                    <input type="email" placeholder="Enter your email" name="email">
+                </div>
+                <div class="inputBox">
+                    <span><i class="fa-solid fa-square-phone"></i>&nbsp phone :</span>
+                    <input type="number" placeholder="Enter your number" name="phone">
+                </div>
+                <div class="inputBox">
+                    <span><i class="fa-solid fa-map-location-dot"></i>&nbsp address :</span>
+                    <input type="text" placeholder="Enter your address" name="address">
+                </div>
+                <div class="inputBox">
+                    <span><i class="fa-solid fa-location-crosshairs"></i>&nbsp where to :</span>
+                    <input type="text" placeholder="Place you want to visit" name="location">
+                </div>
+                <div class="inputBox">
+                    <span><i class="fa-solid fa-people-group"></i>&nbsp how many :</span>
+                    <input type="number" placeholder="Number of guests" name="guests">
+                </div>
+                <div class="inputBox">
+                    <span><i class="fa-solid fa-plane-arrival"></i>&nbsp arrivals :</span>
+                    <input type="date" name="arrivals">
+                </div>
+                <div class="inputBox">
+                    <span><i class="fa-solid fa-person-hiking"></i>&nbsp leaving :</span>
+                    <input type="date" name="leaving">
+                </div>
+            </div>
+
+            <button type="submit"  class="btn" name="send">UPDATE  <i class="fa-solid fa-paper-plane"></i> </button>
+
+        </form>
+
+    </section>
+</body>
+
+</html>
